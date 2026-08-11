@@ -38,42 +38,39 @@ def clean_columns(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def compute_epargne_brute(df: pd.DataFrame,
-                           recettes_fonct_col: str,
-                           depenses_fonct_col: str) -> pd.DataFrame:
+def pivot_agregats(df: pd.DataFrame,
+                    budget_type: str = "Budget principal") -> pd.DataFrame:
     """
-    Calcule l'épargne brute (autofinancement) = recettes réelles de fonctionnement
-    - dépenses réelles de fonctionnement.
+    Transforme le dataset OFGL (format long : une ligne par commune/année/agrégat)
+    en format large (une ligne par commune/année, une colonne par agrégat).
 
-    À adapter selon les noms exacts de colonnes du dataset une fois exploré.
+    Filtre par défaut sur le budget principal pour éviter de mélanger
+    les budgets annexes dans les agrégats globaux.
     """
-    df = df.copy()
-    df["epargne_brute"] = df[recettes_fonct_col] - df[depenses_fonct_col]
-    return df
+    df_filt = df[df["Type de budget"] == budget_type].copy()
+
+    pivot = df_filt.pivot_table(
+        index=["Exercice", "Code Insee 2025 Commune", "Nom 2025 Commune", "Strate population 2025"],
+        columns="Agrégat",
+        values="Montant",
+        aggfunc="sum",
+    ).reset_index()
+
+    pivot.columns.name = None
+    return pivot
 
 
 def compute_taux_endettement(df: pd.DataFrame,
-                              dette_col: str,
-                              recettes_fonct_col: str) -> pd.DataFrame:
+                              dette_col: str = "Encours de dette",
+                              recettes_fonct_col: str = "Recettes de fonctionnement") -> pd.DataFrame:
     """
-    Calcule un taux d'endettement simplifié = encours de dette / recettes réelles
-    de fonctionnement.
+    Calcule un taux d'endettement simplifié = encours de dette / recettes de
+    fonctionnement. À appliquer après pivot_agregats().
     """
     df = df.copy()
     df["taux_endettement"] = df[dette_col] / df[recettes_fonct_col]
     return df
 
 
-def assign_strate_population(df: pd.DataFrame, pop_col: str) -> pd.DataFrame:
-    """
-    Attribue une strate de population standard (utilisée par la DGCL/OFGL)
-    à chaque commune, à partir de sa population.
-    """
-    df = df.copy()
-    bins = [0, 500, 2000, 3500, 5000, 10000, 20000, 50000, 100000, float("inf")]
-    labels = [
-        "<500", "500-2000", "2000-3500", "3500-5000", "5000-10000",
-        "10000-20000", "20000-50000", "50000-100000", ">100000"
-    ]
-    df["strate_population"] = pd.cut(df[pop_col], bins=bins, labels=labels)
-    return df
+# Note : le dataset OFGL fournit déjà une colonne "Strate population 2025"
+# calculée par leurs soins — pas besoin de la recalculer manuellement.
