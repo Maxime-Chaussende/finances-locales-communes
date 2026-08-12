@@ -50,7 +50,7 @@ def pivot_agregats(df: pd.DataFrame,
     df_filt = df[df["Type de budget"] == budget_type].copy()
 
     pivot = df_filt.pivot_table(
-        index=["Exercice", "Code Insee 2025 Commune", "Nom 2025 Commune", "Strate population 2025"],
+        index=["Exercice", "Code Insee 2025 Commune", "Nom 2025 Commune", "Nom 2025 Département", "Strate population 2025"],
         columns="Agrégat",
         values="Montant",
         aggfunc="sum",
