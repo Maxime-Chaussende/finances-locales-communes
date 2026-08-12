@@ -10,23 +10,25 @@ Fort de 3 ans d'alternance en DSI au sein d'une collectivité territoriale, j'ai
 1. Comment évolue l'épargne brute (autofinancement) des communes selon leur strate de population ?
 2. Quelles strates de communes voient leur endettement progresser plus vite que leurs recettes ?
 3. Quel est le poids de l'investissement dans les budgets communaux, et comment évolue-t-il dans le temps ?
-4. Existe-t-il des écarts significatifs entre régions ou strates démographiques sur ces indicateurs ?
 
-> *(À ajuster une fois le dataset exploré — garder 3 à 4 questions maximum, claires et mesurables.)*
 
 ## 📊 Insights clés
 
-*(Section à compléter une fois l'analyse terminée — c'est la partie que les recruteurs lisent en premier. Formuler chaque insight comme dans un rapport métier : le chiffre, le "pourquoi ça compte".)*
-
-- Insight 1 : ...
-- Insight 2 : ...
-- Insight 3 : ...
+- **Épargne brute** : plus élevée par habitant dans les très petites communes, mais 
+  cet écart reflète surtout un effet mécanique de dénominateur (population faible) 
+  plutôt qu'une meilleure santé financière.
+- **Endettement** : en baisse sur la quasi-totalité des strates entre 2018 et 2025 ; 
+  la seule exception notable (villes de 50-80k hab.) s'explique par la trajectoire 
+  d'une commune isolée (Montauban), pas par une tendance de groupe.
+- **Investissement** : suit nettement le cycle électoral municipal (pic en 2019, 
+  creux en 2020-2021, remontée depuis), avec un niveau structurellement plus bas 
+  dans les métropoles.
 
 ## 🗂️ Source des données
 
 Comptes individuels des communes — données issues de la DGFiP / Observatoire des Finances et de la Gestion publique Locale (OFGL), disponibles sur [data.gouv.fr](https://www.data.gouv.fr/datasets/comptes-individuels-des-collectivites/).
 
-Périmètre retenu : *(préciser — ex. une région, ou l'ensemble des communes sur les 3 dernières années disponibles)*
+Périmètre retenu : Région Occitanie sur la période 2018-2025
 
 ## 🛠️ Méthodologie
 
@@ -39,7 +41,7 @@ Périmètre retenu : *(préciser — ex. une région, ou l'ensemble des communes
 ## 📁 Structure du repo
 
 ```
-├── data/raw/              # données brutes (ou script de téléchargement si volumineux)
+├── data/raw/              # données brutes
 ├── notebooks/
 │   ├── 01_exploration.ipynb      # premier contact avec les données
 │   ├── 02_nettoyage.ipynb        # nettoyage et construction des indicateurs
@@ -63,4 +65,4 @@ Python · pandas · matplotlib / seaborn · Jupyter
 
 ## 👤 Auteur
 
-*(ton nom, lien LinkedIn, contexte pro en une ligne)*
+Maxime Chaussende 
