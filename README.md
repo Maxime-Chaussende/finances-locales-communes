@@ -14,12 +14,23 @@ Fort de 3 ans d'alternance en DSI au sein d'une collectivité territoriale, j'ai
 
 ## 📊 Insights clés
 
+### Épargne brute par habitant selon la strate de population
+![Épargne brute par habitant](outputs/figures/epargne_brute_par_habitant_strate.png)
+
 - **Épargne brute** : plus élevée par habitant dans les très petites communes, mais 
   cet écart reflète surtout un effet mécanique de dénominateur (population faible) 
   plutôt qu'une meilleure santé financière.
+
+### Évolution du taux d'endettement par strate
+![Taux d'endettement](outputs/figures/evolution_endettement_strate.png)
+
 - **Endettement** : en baisse sur la quasi-totalité des strates entre 2018 et 2025 ; 
   la seule exception notable (villes de 50-80k hab.) s'explique par la trajectoire 
   d'une commune isolée (Montauban), pas par une tendance de groupe.
+
+### Poids de l'investissement dans le budget
+![Ratio investissement](outputs/figures/ratio_investissement_strate.png)
+
 - **Investissement** : suit nettement le cycle électoral municipal (pic en 2019, 
   creux en 2020-2021, remontée depuis), avec un niveau structurellement plus bas 
   dans les métropoles.
